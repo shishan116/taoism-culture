@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>道法自然 - 东方道教文化</title>
+    
+    <!-- 引入字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- 引入图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 引入动画库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 背景太极 -->
+    <div class="taiji-background">
+        <div class="taiji">
+            <div class="taiji-top"></div>
+            <div class="taiji-bottom"></div>
+        </div>
+    </div>
+    
+    <!-- 粒子效果容器 -->
+    <div id="particles-js"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <div class="bagua-symbol">☰</div>
+                <div class="bagua-symbol">☷</div>
+                <div class="logo-text">The Truth of Nature</div>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link" onclick="showMusicPlayer()">Spell</a>
+                <a href="#" class="nav-link" onclick="showWearGallery()">Relic</a>
+                <a href="#" class="nav-link" onclick="showRitualGallery()">Ritual</a>
+                <a href="#" class="nav-link" onclick="showPilgrimageGallery()">Pilgrimage</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容区域 -->
+    <main class="main-content">
+        <!-- 左侧内容区域 -->
+        <div class="left-content">
+            <div class="intro-text">
+                <p class="en-text">Born from the soil of China, Taoism integrates Huang-Lao philosophy, immortals' practices, and folk beliefs. Rooted in "Revering the Dao, Valuing Virtue, and Embracing Natural Non-Action," it advocates harmony between humanity and nature, and cultivates both body and spirit</p>
+            </div>
+            <div class="daodejing-text">
+                <p>道，可道也，非恒道也。名，可名也，非恒名也。无，名万物之始也；有，名万物之母也。故恒无，欲也，以观其妙；恒有，欲也，以观其所徼。两者同出，异名，同谓。玄之，又玄，众妙之门。</p>
+            </div>
+        </div>
+
+        <!-- 右侧文字区域 -->
+        <div class="text-scroll-container">
+            <div class="daodejing-text">
+                <p>道，可道也，非恒道也。名，可名也，非恒名也。无，名万物之始也；有，名万物之母也。故恒无，欲也，以观其妙；恒有，欲也，以观其所徼。两者同出，异名，同谓。玄之，又玄，众妙之门。</p>
+            </div>
+        </div>
+
+        <!-- 音乐控制器 -->
+        <div class="music-player" style="display: none;">
+            <div class="music-icon">
+                <i class="fas fa-music"></i>
+            </div>
+            <div class="music-info">
+                <span class="current-track">道教音乐</span>
+                <div class="controls">
+                    <button class="play-btn" onclick="togglePlay()"><i class="fas fa-pause"></i></button>
+                    <div class="volume-control">
+                        <i class="fas fa-volume-up"></i>
+                        <input type="range" min="0" max="100" value="30" class="volume-slider" onchange="setVolume(this.value)">
+                    </div>
+                </div>
+            </div>
+            <button class="close-player" onclick="closePlayer()">×</button>
+            <audio id="bgMusic" src="audio/录音.m4a" loop></audio>
+        </div>
+    </main>
+
+    <!-- 修改佩戴展示悬浮窗内容 -->
+    <div class="wear-gallery" style="display: none;">
+        <div class="gallery-content">
+            <button class="close-gallery" onclick="closeGallery()">×</button>
+            <h2>Equipment</h2>
+            <p class="gallery-description">Wearing talismans or magic tools can remove diseases and prevent disasters, exorcise evil spirits and change luck. According to your birth date, the Taoist priest chanting sutras will enlighten you.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/wear1.jpg" alt="道教佩戴">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/wear2.jpg" alt="道教佩戴">
+                </div>
+            </div>
+            <button class="customize-btn" onclick="showCustomization()">Private Customization</button>
+            <div class="customization-email" style="display: none;">
+                ddxc52558@gmail.com
+            </div>
+        </div>
+    </div>
+
+    <!-- 修改祭祀展示悬浮窗 -->
+    <div class="ritual-gallery" style="display: none;">
+        <div class="gallery-content">
+            <button class="close-gallery" onclick="closeRitualGallery()">×</button>
+            <h2>Ritual</h2>
+            <p class="gallery-description">Taoist ritualsalso known as "fasting rituals" or "dojo", are religious activities in Taoism that communicate with the gods through specific rituals, pray for blessings and disasters, and save the souls of the dead. Its core idea is "celestial induction", that is, through rituals, spells, talismans, etc., to reconcile yin and yang, communicate with people and gods, and achieve the purpose of eliminating disasters and relieving suffering and relieving people.<br><br>Mainly divided into:<br>1. Praying for blessings: praying for the peace of the country and the people, good weather, family harmony, smooth career, etc.<br>2. Transcendence Dharma: Transcending the dead, resolving grievances and creditors, and appeasing lonely ghosts.<br>3. Disaster Relief Dharma: Exorcising evil, defusing disasters, and treating diseases.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/wear3.jpg" alt="道教祭祀">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/wear4.jpg" alt="道教祭祀">
+                </div>
+            </div>
+            <button class="customize-btn" onclick="showRitualCustomization()">Private Customization</button>
+            <div class="customization-email" style="display: none;">
+                ddxc52558@gmail.com
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加朝圣展示悬浮窗 -->
+    <div class="pilgrimage-gallery" style="display: none;">
+        <div class="gallery-content">
+            <button class="close-gallery" onclick="closePilgrimageGallery()">×</button>
+            <h2>Pilgrimage</h2>
+            <p class="gallery-description">Taoist cultivation of immortals originates from the pursuit of "longevity and long-term vision". Its thought is rooted in the philosophical system of "Taoism, Law, Nature" and "Unity of Heaven and Man", and advocates the transcendence and eternity of life through both internal and external cultivation.<br><br>The thought of immortal cultivation from a modern perspective:<br>1. Inspiration of physical and mental health: The breathing method and meditation in the practice of inner alchemy are used by modern people to reduce stress and improve concentration.<br>2. Echo of ecological philosophy: The concept of "Unity of Heaven and Man" in Taoism coincides with contemporary ecological protection thought.<br>3. Scientific controversy: The immortality of the body has not been scientifically confirmed, but practice is indeed beneficial to delaying aging and improving the quality of life.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/wear5.jpg" alt="道教朝圣">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/wear6.jpg" alt="道教朝圣">
+                </div>
+            </div>
+            <button class="customize-btn" onclick="showPilgrimageCustomization()">Private Customization</button>
+            <div class="customization-email" style="display: none;">
+                ddxc52558@gmail.com
+            </div>
+        </div>
+    </div>
+
+    <!-- 修改脚本引入顺序和类型 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- 移除 type="module" -->
+    <script src="script.js"></script>
+
+    <!-- 将音频控制代码移到单独的脚本标签中 -->
+    <script>
+        // 音频控制代码
+        const audio = document.getElementById('bgMusic');
+        const playBtn = document.querySelector('.play-btn i');
+        let isPlaying = false;
+
+        // 设置初始音量
+        audio.volume = 0.3;
+
+        // 显示播放器并开始播放
+        function showMusicPlayer() {
+            const player = document.querySelector('.music-player');
+            player.style.display = 'flex';
+            
+            // 开始播放
+            audio.play().catch(error => {
+                console.error("播放失败:", error);
+                playBtn.className = 'fas fa-play';
+                isPlaying = false;
+            });
+            
+            // 更新播放按钮状态
+            playBtn.className = 'fas fa-pause';
+            isPlaying = true;
+        }
+
+        // 关闭播放器
+        function closePlayer() {
+            const player = document.querySelector('.music-player');
+            
+            // 停止播放
+            audio.pause();
+            audio.currentTime = 0;
+            
+            // 隐藏播放器
+            player.style.display = 'none';
+            
+            // 重置播放状态
+            playBtn.className = 'fas fa-play';
+            isPlaying = false;
+        }
+
+        // 播放/暂停切换
+        function togglePlay() {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.className = 'fas fa-play';
+            } else {
+                audio.play();
+                playBtn.className = 'fas fa-pause';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // 音量控制
+        function setVolume(value) {
+            audio.volume = value / 100;
+            const volumeIcon = document.querySelector('.fa-volume-up');
+            if (value == 0) {
+                volumeIcon.className = 'fas fa-volume-mute';
+            } else if (value < 50) {
+                volumeIcon.className = 'fas fa-volume-down';
+            } else {
+                volumeIcon.className = 'fas fa-volume-up';
+            }
+        }
+
+        // 音频结束时重置按钮
+        audio.addEventListener('ended', () => {
+            isPlaying = false;
+            playBtn.className = 'fas fa-play';
+        });
+    </script>
+</body>
+</html> 
